@@ -16,14 +16,19 @@
   <script type="text/javascript">
 
   document.getElementById('btn').addEventListener('click', function (event) {
-    let input = document.getElementById ('input');
+    let input = document.getElementById ('input').value;
+    input = input.split(' ')
+    input = input.map((item) => {
+      return parseInt(item)
+    })
     console.log(input)
+    start(input)
   })
 
 
-  function start() {
+  function start(input) {
     var ctx = document.getElementById('myChart').getContext('2d');
-    let dataArr = [10, 71, 30, 40, 100, 35, 2];
+    let dataArr = input || [10, 71, 30, 40, 100, 35, 2];
     var chart = new Chart(ctx, {
     // The type of chart we want to create
     type: 'bar',
