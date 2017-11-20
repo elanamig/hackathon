@@ -4,16 +4,37 @@ function bubbleSort(array, callback) {
       swapped = false;
       for(var i = 0; i < array.length; i++) {
         if(array[i] && array[i + 1] && array[i] > array[i + 1]) {
-          setTimeout(function() {
             swap(array, i, i + 1);
             swapped = true;
-            callback(array);
-          }, 2000)
         }
       }
     } while(swapped);
     return array;
   }
+
+  function bubbleSort2(items, chart) {  
+    var length = items.length;
+    for (var i = (length - 1); i >= 0; i--) {
+        //Number of passes
+        for (var j = (length - i); j > 0; j--) {
+            //Compare the adjacent positions
+            if (items[j] < items[j - 1]) {
+                //Swap the numbers
+                var tmp = items[j];
+                items[j] = items[j - 1];
+                items[j - 1] = tmp;
+                chart.update()
+            }
+        }
+    }
+}
+
+  function swap (array, i1, i2) {
+    let temp = array[i1];
+    array[i1]= array[i2];
+    array[i2] = temp;
+}
+
 
 
 function mergeSort(arr)
