@@ -7,7 +7,7 @@
   <body>
     <div>
       <input type='text' id='input'>
-      <button type='submit' id='button'>
+      <button type='submit' id='btn'>Sort</button>
     </div>
     <canvas id="myChart"></canvas>
   </body>
@@ -15,64 +15,50 @@
   <script src="sorter.js"></script>
   <script type="text/javascript">
 
-  document.getElementById('button').addEventListner('click', function (event) {
-    let input = document.getElementById ('input').data;
-    console.log(input);
+  document.getElementById('btn').addEventListener('click', function (event) {
+    let input = document.getElementById ('input');
+    console.log(input)
   })
 
 
-  var ctx = document.getElementById('myChart').getContext('2d');
-  let dataArr = [10, 71, 30, 40, 100, 35, 2];
-  let colors = [];
-    colors[71] = '#FF0000'
-    colors[2] = '#FF7F00'
-    colors[10] = '#FFFF00'
-    colors[30] = '#00FF00'
-    colors[35] = '#0000FF'
-    colors[40] = '#8B00FF'
-    colors[100] = '#000000'
-let colorsInit = dataArr.map(number => colors[number]);
-  Chart.plugins.register(function (chart, options) {
-    console.log('callback');
-  })
-  var chart = new Chart(ctx, {
-  // The type of chart we want to create
-  type: 'bar',
+  function start() {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    let dataArr = [10, 71, 30, 40, 100, 35, 2];
+    var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
 
-  // The data for our dataset
-  data: {
-      labels: dataArr,
-      datasets: [{
-          label: "Bubble Sort",
-          backgroundColor: colorsInit,
-          borderColor: colorsInit,
-          data: dataArr
-      }]
-  },
+    // The data for our dataset
+    data: {
+        labels: dataArr,
+        datasets: [{
+            label: "Bubble Sort",
+            backgroundColor: '#FF7F00',
+            borderColor: '#FF7F00',
+            data: dataArr
+        }]
+    },
 
-  // Configuration options go here
-  options: {}
-  });
-  let bigArr = bubbleSort2 (dataArr, chart);
-  let index = 0
-  function animateGraph(arr, chart) {
-    //arr is array of arrays.
-    console.log('animating...')
-    console.log(arr[index])
-    if(index < arr.length) {
-      let colorArr = arr[index].map(value => colors[value]);
-      console.log(colorArr)
-      chart.data.datasets[0].data = arr[index]
-      chart.data.labels = arr[index]
-      chart.data.backgroundColor = colorArr;
-      chart.data.borderColor = colorArr;
-      chart.update({duration: 0})
-      index++
-    } else {
-      clearInterval(intv)
+    // Configuration options go here
+    options: {}
+    });
+    let bigArr = bubbleSort2 (dataArr, chart);
+    let index = 0
+    function animateGraph(arr, chart) {
+      //arr is array of arrays.
+      console.log('animating...')
+      console.log(arr[index])
+      if(index < arr.length) {
+        chart.data.datasets[0].data = arr[index]
+        chart.data.labels = arr[index]
+        chart.update({duration: 0})
+        index++
+      } else {
+        clearInterval(intv)
+      }
     }
-  }
 
-  let intv = setInterval(animateGraph, 1000, bigArr, chart)
+    let intv = setInterval(animateGraph, 1000, bigArr, chart)
+  }
   </script>
 </html>
