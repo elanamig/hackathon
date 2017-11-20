@@ -1,4 +1,4 @@
-function bubbleSort(array) {
+function bubbleSort(array, callback) {
     var swapped;
     do {
       swapped = false;
@@ -6,6 +6,7 @@ function bubbleSort(array) {
         if(array[i] && array[i + 1] && array[i] > array[i + 1]) {
           swap(array, i, i + 1);
           swapped = true;
+          callback(array);
         }
       }
     } while(swapped);
