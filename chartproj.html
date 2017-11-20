@@ -17,12 +17,13 @@
 
   document.getElementById('btn').addEventListener('click', function (event) {
     let input = document.getElementById ('input').value;
-    input = input.split(' ')
+    input = input.split(/[ ,]+/)
     input = input.map((item) => {
       return parseInt(item)
     })
     console.log(input)
     start(input)
+
   })
 
 
@@ -63,7 +64,7 @@
       }
     }
 
-    let intv = setInterval(animateGraph, 1000, bigArr, chart)
+    let intv = setInterval(animateGraph, 500, bigArr, chart)
   }
   </script>
 </html>
